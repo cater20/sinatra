@@ -1,18 +1,33 @@
 class Task
-    attr_accessor :title
+  attr_accessor :title, :id
 
-    @@tasks= []
+  @@tasks = []
+  @@next_id = 1
 
-   def initialize(title)
-      @title =title
-     end
+  def initialize(title)
+    @title = title
+    @id = @@next_id
+    @@next_id += 1
+  end
 
   def save
     @@tasks << self
   end
-        
- def self.all
+
+  def self.all
     @@tasks
- end
+  end
+
+  def self.find(id)
+    @@tasks.find { |task| task.id == id.to_i }
+  end
+
+  def self.delete(id)
+    @@tasks.reject! { |task| task.id == id.to_i }
+  end
+
+  def update(new_title)
+    @title = new_title
+  end
 
 end

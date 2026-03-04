@@ -1,8 +1,19 @@
 
+<h2>Task List</h2>
+<a href="/tasks/new">+ Add New Task</a>
 
-    <a href="/tasks/new">View Tasks</a>
-    <ul >
-      <% @tasks.each do |task| %>
-        <li><%= task.title %></li>
-      <% end %>
-     </ul>
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+      <%= task.title %>
+
+      <!-- Edit button -->
+      <a href="/tasks/<%= task.id %>/edit">✏️ Edit</a>
+
+      <!-- Delete button -->
+      <form action="/tasks/<%= task.id %>/delete" method="post" style="display:inline">
+        <button type="submit">🗑️ Delete</button>
+      </form>
+    </li>
+  <% end %>
+</ul>
